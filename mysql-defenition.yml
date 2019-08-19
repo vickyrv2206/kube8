@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-server
+  labels:
+    app : mrbs
+    tier : back-end
+spec:
+  template:
+    metadata:
+      name: mrbs-mysql
+      labels:
+        app : mrbs
+        tier : back-end
+    spec:
+      containers:
+      - name : mrbs-mysql-container
+        image : vickyrv2206/mysql:3.0
+        ports:
+        - containerPort: 3306
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: back-end
+      app: mrbs
