@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+  labels:
+    app : mrbs
+    tier : front-end
+spec:
+  template:
+    metadata:
+      name: mrbs-apache
+      labels:
+        app : mrbs
+        tier : front-end
+    spec:
+      containers:
+      - name : mrbs-apache-container
+        image : vickyrv2206/apache:5.0
+        ports:
+        - containerPort: 80
+      nodeName: gke-master-default-pool-c0c9ad61-hcmb
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: front-end
+      app: mrbs
